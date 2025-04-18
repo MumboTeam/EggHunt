@@ -10,6 +10,7 @@ import eu.pb4.polymer.virtualentity.api.attachment.EntityAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import eu.pb4.polymer.virtualentity.api.elements.TextDisplayElement;
 import io.github.mumboteam.egghunt.EggHunt;
+import io.github.mumboteam.egghunt.RewardDistributor;
 import io.github.mumboteam.egghunt.registry.ModItems;
 import io.github.mumboteam.egghunt.utils.EggHuntState;
 import net.minecraft.entity.Entity;
@@ -19,6 +20,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemDisplayContext;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.PlayerListS2CPacket;
@@ -199,6 +201,11 @@ public class BunnyEntity extends Entity implements PolymerEntity {
                     return eggCount + eggs.get();
                 }
             });
+            if (!EggHunt.dailyPlayerSubmissions.contains(player.getUuid())) {
+                EggHunt.dailyPlayerSubmissions.add(player.getUuid());
+                RewardDistributor.spawnFor(player, Items.DIAMOND, 5);
+                player.sendMessage(Text.translatable("text.egghunt.daily_reward"), false);
+            }
             player.sendMessage(Text.translatable("text.egghunt.returned", eggs.get(), (eggs.get() == 1) ? "" : "s"), false);
             updateLeaderboard(state);
         }

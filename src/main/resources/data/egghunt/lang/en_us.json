@@ -3,5 +3,6 @@
   "item.egghunt.egg": "Egg",
   "text.egghunt.returned": "You returned %d egg%s, well done!",
   "text.egghunt.empty": "Looks like you don't have any eggs, go collect some!",
-  "text.egghunt.egg_return": "Right click to\nreturn eggs!"
+  "text.egghunt.egg_return": "Right click to\nreturn eggs!",
+  "text.egghunt.daily_reward": "You’ve earned a few diamonds for participating today! Keep it up!"
 }

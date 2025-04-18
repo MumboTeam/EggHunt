@@ -9,9 +9,16 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class EggHunt implements ModInitializer {
     public static final String ID = "egghunt";
     public static final Logger LOGGER = LoggerFactory.getLogger(ID);
+    public static final Set<UUID> dailyPlayerSubmissions =
+            Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     @Override
     public void onInitialize() {
