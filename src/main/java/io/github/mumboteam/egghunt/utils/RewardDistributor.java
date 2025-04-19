@@ -1,6 +1,5 @@
-package io.github.mumboteam.egghunt;
+package io.github.mumboteam.egghunt.utils;
 
-import io.github.mumboteam.egghunt.utils.EggHuntState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
