@@ -6,7 +6,7 @@ import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import io.github.mumboteam.egghunt.registry.ModBlocks;
 import io.github.mumboteam.egghunt.registry.ModEntityTypes;
 import io.github.mumboteam.egghunt.registry.ModItems;
-import io.github.mumboteam.egghunt.utils.RewardsState;
+import io.github.mumboteam.egghunt.utils.EggHuntState;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.fabricmc.api.ModInitializer;
 
@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,11 +45,7 @@ public class EggHunt implements ModInitializer {
                     .executes((CommandContext<ServerCommandSource> context) ->
             {
                 ServerCommandSource source = context.getSource();
-                ServerPlayerEntity player = source.getPlayer();
-                if (player == null) {
-                    return 0;
-                }
-                source.sendFeedback(() -> Text.translatable("text.egghunt.owed_rewards", String.valueOf(RewardsState.getServerState(source.getWorld().getServer()).totalDiamonds)), false);
+                source.sendFeedback(() -> Text.translatable("text.egghunt.owed_rewards", String.valueOf(EggHuntState.getServerState(source.getServer()).totalDiamonds)), false);
 
                 return 1;
             }));

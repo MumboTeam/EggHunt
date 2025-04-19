@@ -4,7 +4,6 @@ import io.github.mumboteam.egghunt.EggHunt;
 import io.github.mumboteam.egghunt.block.EggBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
