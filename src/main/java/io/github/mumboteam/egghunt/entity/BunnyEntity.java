@@ -203,7 +203,7 @@ public class BunnyEntity extends Entity implements PolymerEntity {
             });
             if (!EggHunt.dailyPlayerSubmissions.contains(player.getUuid())) {
                 EggHunt.dailyPlayerSubmissions.add(player.getUuid());
-                RewardDistributor.spawnFor(player, Items.DIAMOND, 5);
+                RewardDistributor.spawnFor(player, Items.DIAMOND, 3);
                 player.sendMessage(Text.translatable("text.egghunt.daily_reward"), false);
             }
             player.sendMessage(Text.translatable("text.egghunt.returned", eggs.get(), (eggs.get() == 1) ? "" : "s"), false);

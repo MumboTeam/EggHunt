@@ -5,7 +5,8 @@
 	"name": "Egg Hunt",
 	"description": "Server-side egg hunt game for Minecraft",
 	"authors": [
-		"JoeGaming"
+		"JoeGaming",
+		"FortP"
 	],
 	"contact": {
 		"sources": "https://github.com/MumboTeam/EggHunt",

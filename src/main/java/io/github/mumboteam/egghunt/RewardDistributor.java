@@ -1,5 +1,6 @@
 package io.github.mumboteam.egghunt;
 
+import io.github.mumboteam.egghunt.utils.RewardsState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
@@ -13,5 +14,7 @@ public class RewardDistributor {
         ItemStack stack = new ItemStack(item, count);
         ItemEntity drop = new ItemEntity(world, x, y, z, stack);
         world.spawnEntity(drop);
+        RewardsState state = RewardsState.getServerState(player.getServer());
+        state.totalDiamonds += count;
     }
 }
