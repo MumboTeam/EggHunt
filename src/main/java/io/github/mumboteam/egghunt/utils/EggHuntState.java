@@ -11,24 +11,30 @@ import net.minecraft.world.World;
 import java.util.*;
 
 public class EggHuntState extends PersistentState {
-    public HashMap<UUID, Integer> players = new HashMap<>();
+    public HashMap<UUID, Integer> playerScores = new HashMap<>();
+    public int totalDiamonds = 0;
 
     public NbtCompound writeNbt(NbtCompound nbt) {
-        players.forEach((uuid, eggCount) -> {
+        NbtCompound players = new NbtCompound();
+        playerScores.forEach((uuid, eggCount) -> {
             NbtCompound player = new NbtCompound();
             player.putInt("eggCount", eggCount);
-            nbt.put(uuid.toString(), player);
+            players.put(uuid.toString(), player);
         });
+        nbt.put("players", players);
+        nbt.putInt("totalDiamonds", totalDiamonds);
         return nbt;
     }
 
     public static EggHuntState createFromNbt(NbtCompound tag) {
         EggHuntState state = new EggHuntState();
-        tag.getKeys().forEach(uuid -> {
-            NbtCompound player = tag.getCompound(uuid).get();
+        NbtCompound players = tag.getCompoundOrEmpty("players");
+        players.getKeys().forEach(uuid -> {
+            NbtCompound player = players.getCompound(uuid).get();
             int eggCount = player.getInt("eggCount").orElse(0);
-            state.players.put(UUID.fromString(uuid), eggCount);
+            state.playerScores.put(UUID.fromString(uuid), eggCount);
         });
+        state.totalDiamonds = tag.getInt("totalDiamonds").orElse(0);
         return state;
     }
 

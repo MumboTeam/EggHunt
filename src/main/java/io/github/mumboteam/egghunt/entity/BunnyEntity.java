@@ -156,7 +156,7 @@ public class BunnyEntity extends Entity implements PolymerEntity {
         Style style = Style.EMPTY.withFont(Identifier.of(EggHunt.ID, "mono"));
         AtomicInteger count = new AtomicInteger(0);
 
-        state.players.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(10).forEach(entry -> {
+        state.playerScores.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(10).forEach(entry -> {
             Optional<GameProfile> profile = this.getServer().getUserCache().getByUuid(entry.getKey());
             profile.ifPresent(gameProfile -> {
                 MutableText line = Text.literal(String.format(" %2d. %-16s - %3d \n", count.incrementAndGet(), gameProfile.getName(), entry.getValue()));
@@ -172,8 +172,8 @@ public class BunnyEntity extends Entity implements PolymerEntity {
                 text.append(line);
             });
         });
-        if (state.players.size() < 10) {
-            for (int i=0; i<10-state.players.size(); i++) {
+        if (state.playerScores.size() < 10) {
+            for (int i = 0; i<10-state.playerScores.size(); i++) {
                 text.append(Text.literal(String.format(" %2d. ________________ - ___ \n", count.incrementAndGet())).setStyle(style.withColor(Formatting.GRAY)));
             }
         }
@@ -198,7 +198,7 @@ public class BunnyEntity extends Entity implements PolymerEntity {
         if (eggs.get() == 0) {
             player.sendMessage(Text.translatable("text.egghunt.empty"), false);
         } else {
-            state.players.compute(player.getUuid(), (uuid, eggCount) -> {
+            state.playerScores.compute(player.getUuid(), (uuid, eggCount) -> {
                 if (eggCount == null) {
                     return eggs.get();
                 } else {
