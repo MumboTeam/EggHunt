@@ -186,6 +186,10 @@ public class BunnyEntity extends Entity implements PolymerEntity {
         AtomicInteger eggs = new AtomicInteger();
         player.getInventory().forEach(itemStack -> {
             if (itemStack.isIn(TagKey.of(RegistryKeys.ITEM, Identifier.of(EggHunt.ID, "eggs")))) {
+                if (itemStack.isOf(ModItems.EGG_MUMBO)) {
+                    player.sendMessage(Text.translatable("text.egghunt.mumbo"), false);
+                    RewardDistributor.spawnFor(player, Items.DIAMOND, 5);
+                }
                 itemStack.setCount(0);
                 eggs.getAndIncrement();
             }
