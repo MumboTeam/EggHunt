@@ -7,6 +7,7 @@ import io.github.mumboteam.egghunt.registry.ModBlocks;
 import io.github.mumboteam.egghunt.registry.ModEntityTypes;
 import io.github.mumboteam.egghunt.registry.ModItems;
 import io.github.mumboteam.egghunt.utils.RewardsState;
+import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -40,7 +41,9 @@ public class EggHunt implements ModInitializer {
 
         CommandRegistrationCallback.EVENT.register((CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registry_access, CommandManager.RegistrationEnvironment environment) ->
         {
-            dispatcher.register(CommandManager.literal("egghunt").executes((CommandContext<ServerCommandSource> context) ->
+            dispatcher.register(CommandManager.literal("egghunt")
+                    .requires(Permissions.require("egghunt.commands", 4))
+                    .executes((CommandContext<ServerCommandSource> context) ->
             {
                 ServerCommandSource source = context.getSource();
                 ServerPlayerEntity player = source.getPlayer();

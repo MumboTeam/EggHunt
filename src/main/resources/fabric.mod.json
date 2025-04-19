@@ -29,6 +29,7 @@
 		"java": ">=21",
 		"fabric-api": "*",
 		"polymer-core": ">=0.10.0",
-		"polymer-resource-pack": ">=0.10.0"
+		"polymer-resource-pack": ">=0.10.0",
+		"fabric-permissions-api-v0": "*"
 	}
 }
