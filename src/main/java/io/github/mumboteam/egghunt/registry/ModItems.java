@@ -1,8 +1,11 @@
 package io.github.mumboteam.egghunt.registry;
 
 import eu.pb4.polymer.core.api.item.PolymerBlockItem;
+import eu.pb4.polymer.core.api.item.PolymerItem;
 import eu.pb4.polymer.core.api.item.PolymerItemGroupUtils;
+import eu.pb4.polymer.core.api.item.SimplePolymerItem;
 import io.github.mumboteam.egghunt.EggHunt;
+import io.github.mumboteam.egghunt.item.EggSpawner;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -30,6 +33,9 @@ public class ModItems {
     public static final Item EGG_3_2 = registerEgg("egg32", (settings) -> new PolymerBlockItem(ModBlocks.EGG_3_2, settings));
     public static final Item EGG_3_3 = registerEgg("egg33", (settings) -> new PolymerBlockItem(ModBlocks.EGG_3_3, settings));
     public static final Item EGG_MUMBO = registerEgg("eggmumbo", (settings) -> new PolymerBlockItem(ModBlocks.EGG_MUMBO, settings));
+
+    public static final Item EGG_SPAWNER = register("egg_spawner", (EggSpawner::new));
+    public static final Item MUMBO_EGG_SPAWNER = register("mumbo_egg_spawner", (EggSpawner::new));
 
     public static Item register(String path, Function<Item.Settings, Item> function) {
         Identifier id = Identifier.of(EggHunt.ID, path);
@@ -61,6 +67,8 @@ public class ModItems {
                     entries.add(EGG_3_2);
                     entries.add(EGG_3_3);
                     entries.add(EGG_MUMBO);
+                    entries.add(EGG_SPAWNER);
+                    entries.add(MUMBO_EGG_SPAWNER);
                 })).build()
         );
     }

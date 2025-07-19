@@ -4,6 +4,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.world.World;
 
 public class RewardDistributor {
@@ -13,7 +14,9 @@ public class RewardDistributor {
         ItemStack stack = new ItemStack(item, count);
         ItemEntity drop = new ItemEntity(world, x, y, z, stack);
         world.spawnEntity(drop);
-        EggHuntState state = EggHuntState.getServerState(player.getServer());
-        state.totalDiamonds += count;
+        if (item == Items.DIAMOND) {
+            EggHuntState state = EggHuntState.getServerState(player.getServer());
+            state.totalDiamonds += count;
+        }
     }
 }

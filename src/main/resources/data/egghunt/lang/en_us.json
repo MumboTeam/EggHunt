@@ -1,10 +1,13 @@
 {
   "itemGroup.egghunt": "Egg Hunt",
   "item.egghunt.egg": "Egg",
+  "item.egghunt.egg_spawner": "Egg Spawner",
+  "item.egghunt.mumbo_egg_spawner": "Mumbo Egg Spawner",
   "text.egghunt.returned": "You returned %d egg%s, well done!",
   "text.egghunt.empty": "Looks like you don't have any eggs, go collect some!",
   "text.egghunt.egg_return": "Right click to\nreturn eggs!",
   "text.egghunt.daily_reward": "You’ve earned a few diamonds for participating today! Keep it up!",
   "text.egghunt.owed_rewards": "So far %d diamonds have been paid out",
-  "text.egghunt.mumbo": "Congratulations! You found a rare Mumbo egg! Enjoy your reward!"
+  "text.egghunt.mumbo": "Congratulations! You found a rare Mumbo egg! Enjoy your reward!",
+  "text.egghunt.collected": "Congratulations! You found an egg!"
 }

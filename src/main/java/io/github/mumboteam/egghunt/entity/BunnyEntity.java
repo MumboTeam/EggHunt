@@ -10,6 +10,7 @@ import eu.pb4.polymer.virtualentity.api.attachment.EntityAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import eu.pb4.polymer.virtualentity.api.elements.TextDisplayElement;
 import io.github.mumboteam.egghunt.EggHunt;
+import io.github.mumboteam.egghunt.utils.PlayerData;
 import io.github.mumboteam.egghunt.utils.RewardDistributor;
 import io.github.mumboteam.egghunt.registry.ModItems;
 import io.github.mumboteam.egghunt.utils.EggHuntState;
@@ -143,7 +144,7 @@ public class BunnyEntity extends Entity implements PolymerEntity {
     }
 
     @Override
-    protected void readCustomData(ReadView veiw) {
+    protected void readCustomData(ReadView view) {
 
     }
 
@@ -157,13 +158,13 @@ public class BunnyEntity extends Entity implements PolymerEntity {
         Style style = Style.EMPTY.withFont(Identifier.of(EggHunt.ID, "mono"));
         AtomicInteger count = new AtomicInteger(0);
 
-        state.playerScores.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(10).forEach(entry -> {
+        state.playerData.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.comparingInt(PlayerData::getEggCount).reversed())).limit(10).forEach(entry -> {
             Optional<GameProfile> profile = this.getServer().getUserCache().getByUuid(entry.getKey());
             String name = "Unknown player";
             if (profile.isPresent()) {
                 name = profile.get().getName();
             }
-            MutableText line = Text.literal(String.format(" %2d. %-16s - %3d \n", count.incrementAndGet(), name, entry.getValue()));
+            MutableText line = Text.literal(String.format(" %2d. %-16s - %3d \n", count.incrementAndGet(), name, entry.getValue().getEggCount()));
             if (count.get() == 1) {
                 line.setStyle(style.withColor(0xffd700));
             } else if (count.get() == 2) {
@@ -175,8 +176,8 @@ public class BunnyEntity extends Entity implements PolymerEntity {
             }
             text.append(line);
         });
-        if (state.playerScores.size() < 10) {
-            for (int i = 0; i<10-state.playerScores.size(); i++) {
+        if (state.playerData.size() < 10) {
+            for (int i = 0; i<10-state.playerData.size(); i++) {
                 text.append(Text.literal(String.format(" %2d. ________________ - ___ \n", count.incrementAndGet())).setStyle(style.withColor(Formatting.GRAY)));
             }
         }
@@ -201,11 +202,14 @@ public class BunnyEntity extends Entity implements PolymerEntity {
         if (eggs.get() == 0) {
             player.sendMessage(Text.translatable("text.egghunt.empty"), false);
         } else {
-            state.playerScores.compute(player.getUuid(), (uuid, eggCount) -> {
-                if (eggCount == null) {
-                    return eggs.get();
+            state.playerData.compute(player.getUuid(), (uuid, data) -> {
+                if (data == null) {
+                    PlayerData pData = new PlayerData();
+                    pData.increaseEggCount(eggs.get());
+                    return pData;
                 } else {
-                    return eggCount + eggs.get();
+                    data.increaseEggCount(eggs.get());
+                    return data;
                 }
             });
             if (!EggHunt.dailyPlayerSubmissions.contains(player.getUuid())) {
