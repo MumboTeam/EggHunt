@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "egghunt",
+	"id": "flagparticipation",
 	"version": "${version}",
-	"name": "Egg Hunt",
-	"description": "Server-side egg hunt game for Minecraft",
+	"name": "Flag Participation",
+	"description": "Player collectable flags to track participation",
 	"authors": [
 		"JoeGaming",
 		"FortP"
@@ -13,15 +13,15 @@
 		"issues": "https://github.com/MumboTeam/EggHunt/issues"
 	},
 	"license": "LGPLv3",
-	"icon": "assets/egghunt/icon.png",
+	"icon": "assets/flagparticipation/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "io.github.mumboteam.egghunt.EggHunt"
+          "io.github.mumboteam.flagparticipation.FlagParticipation"
 		]
 	},
 	"mixins": [
-		"egghunt.mixins.json"
+      "flagparticipation.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.11",

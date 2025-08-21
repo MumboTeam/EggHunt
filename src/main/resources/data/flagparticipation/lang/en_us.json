@@ -1,0 +1,6 @@
+{
+  "itemGroup.flagparticipation": "Flags",
+  "item.flagparticipation.flag": "Flag",
+  "text.flagparticipation.collected": "Thanks for participating!",
+  "text.flagparticipation.admin_removed" : "Flag removed"
+}
