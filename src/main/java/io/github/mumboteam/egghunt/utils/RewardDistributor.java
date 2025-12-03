@@ -9,13 +9,13 @@ import net.minecraft.world.World;
 
 public class RewardDistributor {
     public static void spawnFor(PlayerEntity player, ItemConvertible item, int count) {
-        World world = player.getWorld();
+        World world = player.getEntityWorld();
         double x = player.getX(), y = player.getY() + 1, z = player.getZ();
         ItemStack stack = new ItemStack(item, count);
         ItemEntity drop = new ItemEntity(world, x, y, z, stack);
         world.spawnEntity(drop);
         if (item == Items.DIAMOND) {
-            EggHuntState state = EggHuntState.getServerState(player.getServer());
+            EggHuntState state = EggHuntState.getServerState(player.getEntityWorld().getServer());
             state.totalDiamonds += count;
         }
     }

@@ -5,7 +5,6 @@ import eu.pb4.polymer.core.api.entity.PolymerEntity;
 import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.attachment.EntityAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
-import io.github.mumboteam.egghunt.EggHunt;
 import io.github.mumboteam.egghunt.registry.ModItems;
 import io.github.mumboteam.egghunt.utils.EggHuntState;
 import io.github.mumboteam.egghunt.utils.PlayerData;
@@ -17,7 +16,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.EntitiesDestroyS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -84,7 +82,7 @@ public class EggEntity extends Entity implements PolymerEntity {
             elementHolder.addElement(this.eggDisplay);
         }
 
-        EggHuntState state = EggHuntState.getServerState(getWorld().getServer());
+        EggHuntState state = EggHuntState.getServerState(getEntityWorld().getServer());
         if (!state.eggIds.contains(this.uuid)) {
             state.eggIds.add(this.uuid);
             state.markDirty();
@@ -95,7 +93,7 @@ public class EggEntity extends Entity implements PolymerEntity {
 
     @Override
     public ActionResult interact(PlayerEntity player, Hand hand) {
-        EggHuntState state = EggHuntState.getServerState(player.getServer());
+        EggHuntState state = EggHuntState.getServerState(player.getEntityWorld().getServer());
         PlayerData playerData = state.playerData.get(player.getUuid());
         if (playerData == null || !playerData.isAdmin()) {
             player.sendMessage(Text.translatable("text.egghunt.collected").setStyle(Style.EMPTY.withColor(Formatting.AQUA)), true);
@@ -124,7 +122,7 @@ public class EggEntity extends Entity implements PolymerEntity {
 
     @Override
     public void onStartedTrackingBy(ServerPlayerEntity player) {
-        EggHuntState state = EggHuntState.getServerState(player.getServer());
+        EggHuntState state = EggHuntState.getServerState(player.getEntityWorld().getServer());
         PlayerData playerData = state.playerData.get(player.getUuid());
         if (playerData != null && playerData.getFoundEggs().contains(this.uuid)) {
             // Wait a few ticks so the client can process that the entity exists
@@ -133,7 +131,7 @@ public class EggEntity extends Entity implements PolymerEntity {
     }
 
     private void hideFromClient(ServerPlayerEntity player) {
-        EggHuntState state = EggHuntState.getServerState(this.getServer());
+        EggHuntState state = EggHuntState.getServerState(player.getEntityWorld().getServer());
         if (!state.playerData.get(player.getUuid()).isAdmin()) {
             player.networkHandler.sendPacket(
                     new EntitiesDestroyS2CPacket(this.getId())
@@ -166,7 +164,6 @@ public class EggEntity extends Entity implements PolymerEntity {
     @Override
     protected void readCustomData(ReadView view) {
         String id = view.getString("EggVariant", "");
-        EggHunt.LOGGER.info(id);
         if (!id.isEmpty()) {
             Identifier itemId = Identifier.of(id);
             this.egg = Registries.ITEM.get(itemId);
