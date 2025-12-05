@@ -1,0 +1,19 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        ".": -169
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "gifthunt:font/background.png",
+      "ascent": 13,
+      "height": 170,
+      "chars": [
+        "1"
+      ]
+    }
+  ]
+}

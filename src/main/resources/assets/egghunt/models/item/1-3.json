@@ -1,6 +1,0 @@
-{
-    "parent": "egghunt:item/generic",
-    "textures": {
-      "0": "egghunt:item/1-3"
-    }
-}

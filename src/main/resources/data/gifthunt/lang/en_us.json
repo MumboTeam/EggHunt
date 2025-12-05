@@ -1,0 +1,13 @@
+{
+  "itemGroup.gifthunt": "Gift Hunt",
+  "item.gifthunt.gift": "Gift",
+  "item.gifthunt.gift_spawner": "Gift Spawner",
+  "item.gifthunt.shiny_gift_spawner": "Shiny Gift Spawner",
+  "text.gifthunt.returned": "You returned %d gift%s, well done!",
+  "text.gifthunt.empty": "Looks like you don't have any gifts, go collect some!",
+  "text.gifthunt.gift_return": "Right click to\nreturn gifts!",
+  "text.gifthunt.daily_reward": "You’ve earned a few diamonds for participating today! Keep it up!",
+  "text.gifthunt.owed_rewards": "So far %d diamonds have been paid out",
+  "text.gifthunt.shiny": "Congratulations! You found a rare shiny gift! Enjoy your reward!",
+  "text.gifthunt.collected": "Congratulations! You found an gift!"
+}
