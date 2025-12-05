@@ -1,9 +1,7 @@
-# Egg Hunt
+# Gift Hunt
 
-Server-side egg hunt game for Minecraft
+Server-side gift hunt game for Minecraft
 
 ## Credits
 
 **Monospace Font**: https://modrinth.com/resourcepack/mono7/
-
-**Egg models** - FortP
