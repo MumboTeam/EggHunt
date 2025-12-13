@@ -38,7 +38,6 @@ public class ModItems {
 
     public static Item registerGift(String path, Function<Item.Settings, Item> function) {
         Identifier id = Identifier.of(GiftHunt.ID, path);
-        System.out.println(id);
         Item item = function.apply(new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, id)).translationKey("item.gifthunt.gift").maxCount(1));
         return Registry.register(Registries.ITEM, id, item);
     }
