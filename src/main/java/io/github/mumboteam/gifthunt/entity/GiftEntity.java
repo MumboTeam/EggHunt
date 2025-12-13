@@ -6,6 +6,7 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.attachment.EntityAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import eu.pb4.polymer.virtualentity.mixin.accessors.InteractionEntityAccessor;
+import io.github.mumboteam.gifthunt.GiftHunt;
 import io.github.mumboteam.gifthunt.registry.ModItems;
 import io.github.mumboteam.gifthunt.utils.GiftHuntState;
 import io.github.mumboteam.gifthunt.utils.PlayerData;
@@ -53,17 +54,17 @@ public class GiftEntity extends Entity implements PolymerEntity {
 
     public GiftEntity(EntityType<? extends GiftEntity> type, World world) {
         super(type, world);
+        GiftHunt.LOGGER.info("Gift created without variant");
         this.gift = randomGift(VARIANTS);
         this.giftDisplay = ItemDisplayElementUtil.createSimple(this.gift);
         this.giftDisplay.setOffset(new Vec3d(0, 0.5, 0));
-//        this.giftDisplay.setRotation(-90.0f, 0.0f);
     }
 
     public GiftEntity(EntityType<? extends GiftEntity> type, World world, Item variant) {
         super(type, world);
+        GiftHunt.LOGGER.info("Gift created with variant");
         this.gift = variant;
         this.giftDisplay = ItemDisplayElementUtil.createSimple(this.gift);
-        this.giftDisplay.setRotation(-90.0f, 0.0f);
     }
 
     @Override
@@ -168,7 +169,7 @@ public class GiftEntity extends Entity implements PolymerEntity {
             Identifier itemId = Identifier.of(id);
             this.gift = Registries.ITEM.get(itemId);
             this.giftDisplay = ItemDisplayElementUtil.createSimple(this.gift);
-            this.giftDisplay.setRotation(-90f, 0f);
+            this.giftDisplay.setOffset(new Vec3d(0, 0.5, 0));
         }
     }
 
