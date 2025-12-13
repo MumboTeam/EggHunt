@@ -22,7 +22,8 @@ public class Commands {
                         .executes(Commands::clearGifts))
                 .then(CommandManager.literal("admin")
                         .executes(Commands::admin))
-                ;
+                .then(CommandManager.literal("get_spawner")
+                        .executes(Commands::getSpawner));
     }
 
     private static int payouts(CommandContext<ServerCommandSource> context) {
@@ -82,5 +83,14 @@ public class Commands {
         } else {
             return 0;
         }
+    }
+
+    public static int getSpawner(CommandContext<ServerCommandSource> context) {
+        ServerCommandSource source = context.getSource();
+        if (source.getPlayer() instanceof ServerPlayerEntity player) {
+            source.getServer().getCommandManager().parseAndExecute(source, "give @s gifthunt:gift_spawner");
+            return 1;
+        }
+        return 0;
     }
 }
