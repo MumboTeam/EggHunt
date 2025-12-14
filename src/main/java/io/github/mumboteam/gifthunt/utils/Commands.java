@@ -3,6 +3,7 @@ package io.github.mumboteam.gifthunt.utils;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import io.github.mumboteam.gifthunt.GiftHunt;
+import io.github.mumboteam.gifthunt.registry.ModItems;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.CommandManager;
@@ -88,7 +89,7 @@ public class Commands {
     public static int getSpawner(CommandContext<ServerCommandSource> context) {
         ServerCommandSource source = context.getSource();
         if (source.getPlayer() instanceof ServerPlayerEntity player) {
-            source.getServer().getCommandManager().parseAndExecute(source, "give @s gifthunt:gift_spawner");
+            player.giveItemStack(ModItems.GIFT_SPAWNER.getDefaultStack());
             return 1;
         }
         return 0;
