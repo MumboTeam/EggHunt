@@ -91,6 +91,7 @@ public class GiftEntity extends Entity implements PolymerEntity {
     public ActionResult interact(PlayerEntity player, Hand hand) {
         GiftHuntState state = GiftHuntState.getServerState(player.getEntityWorld().getServer());
         PlayerData playerData = state.playerData.get(player.getUuid());
+        if (playerData != null && playerData.getFoundGifts().contains(this.uuid)) return ActionResult.FAIL;
         if (playerData == null || !playerData.isAdmin()) {
             player.sendMessage(Text.translatable("text.gifthunt.collected").setStyle(Style.EMPTY.withColor(Formatting.AQUA)), true);
             if (playerData != null) {
